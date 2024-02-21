@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import axios from 'axios'
 import { useSWRConfig } from 'swr'
-import { useRouter } from 'next/router'
 import moment from 'moment'
 
 import EditCard from '../card/EditCard'
@@ -148,14 +147,18 @@ export default function Review({
     <ReviewContainer>
       <TilteContainer>
         <Title1>{!editCard && title}</Title1>
-        <StyledFlex>
-          <EditImg src="/edit.png" />
-          <TextEdit onClick={handleEdit}>{editCard ? '-' : 'Editar'}</TextEdit>
-        </StyledFlex>
-        <StyledFlex>
-          <TrashImg src="/trash.png" />
-          <TextDelete onClick={handleDelete}>{editCard ? '-' : 'Deletar'}</TextDelete>
-        </StyledFlex>
+        {isOwner && (
+          <>
+            <StyledFlex>
+              <EditImg src="/edit.png" />
+              <TextEdit onClick={handleEdit}>{editCard ? '-' : 'Editar'}</TextEdit>
+            </StyledFlex>
+            <StyledFlex>
+              <TrashImg src="/trash.png" />
+              <TextDelete onClick={handleDelete}>{editCard ? '-' : 'Deletar'}</TextDelete>
+            </StyledFlex>
+          </>
+        )}
       </TilteContainer>
       <CategoryContainer1>
         <CategoryImg1 src="/car-white.png" />

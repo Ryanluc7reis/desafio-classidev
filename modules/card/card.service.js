@@ -13,24 +13,21 @@ export const createCard = async (body, user) => {
 }
 export const getOneCard = async (id, user) => {
   return await Anuncio.findOne({
-    _id: id,
-    creator: user.id
+    _id: id
   })
 }
 export const getCards = async (limit = 10) => {
   return await Anuncio.find().sort({ createdDate: -1 }).limit(limit)
 }
-export const deleteCard = async (id, user) => {
+export const deleteCard = async (id) => {
   return await Anuncio.findOneAndDelete({
-    _id: id,
-    creator: user.id
+    _id: id
   })
 }
-export const editCard = async (body, user) => {
+export const editCard = async (body) => {
   return await Anuncio.findOneAndUpdate(
     {
-      _id: body.id,
-      creator: user.id
+      _id: body.id
     },
     {
       title: body.title,

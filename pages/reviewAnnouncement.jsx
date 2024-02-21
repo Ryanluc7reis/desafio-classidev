@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import axios from 'axios'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
+import { withIronSessionSsr } from 'iron-session/next'
+
+import { ironConfig } from '../lib/middlewares/ironSession'
 
 import NavBar from '../src/components/navbar/NavBar'
 import Footer from '../src/components/footer/Footer'
@@ -42,7 +45,6 @@ export default function reviewAnnouncementPage({ user }) {
     return response.data
   }
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher)
-
   return (
     <Container>
       <NavBar type2 />
@@ -60,9 +62,28 @@ export default function reviewAnnouncementPage({ user }) {
           description={card.description}
           category={card.category}
           whatsapp={card.whatsapp}
+          isOwner={card.creator === user.id}
         />
       ))}
       <Footer />
     </Container>
   )
 }
+export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }) {
+  const user = req.session.user
+
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      }
+    }
+  }
+
+  return {
+    props: {
+      user
+    }
+  }
+}, ironConfig)
