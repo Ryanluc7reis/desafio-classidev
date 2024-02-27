@@ -11,7 +11,7 @@ export const createCard = async (body, user) => {
     creator: user.id
   })
 }
-export const getOneCard = async (id, user) => {
+export const getOneCard = async (id) => {
   return await Anuncio.findOne({
     _id: id
   })

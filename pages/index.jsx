@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import Link from 'next/link'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import { withIronSessionSsr } from 'iron-session/next'
@@ -84,7 +85,7 @@ export default function Home() {
   )
 
   const handleCategoryChange = (selectedValue) => {
-    setSelectedCategory(selectedValue) // Atualiza o estado com o valor selecionado
+    setSelectedCategory(selectedValue) 
   }
 
   const handleSeach = (e) => {
@@ -99,6 +100,12 @@ export default function Home() {
           <Input name="title" control={control} onChange={handleSeach} type1 />
           <Selecter name="price" control={control} onChange={handleCategoryChange} type2 />
         </InputsContainer>
+        <Link
+          style={{ color: 'white', fontSize: '17px', margin: '25px ' }}
+          href="/reviewAnnouncement"
+        >
+          {filterData.length === 0 ? '' : 'Veja mais sobre os anúncios'}
+        </Link>
         <ContainerCards>
           {filterData.length === 0 ? (
             <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
