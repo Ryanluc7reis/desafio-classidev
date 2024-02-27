@@ -4,11 +4,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { withIronSessionSsr } from 'iron-session/next'
-
 import { ironConfig } from '../lib/middlewares/ironSession'
-
 import Input from '../src/components/form/Input'
 import NavBar from '../src/components/navbar/NavBar'
 import Card from '../src/components/card/Card'
@@ -30,12 +27,14 @@ const ContainerCards = styled.div`
     flex-wrap: wrap;
   }
 `
+
 const ContainerContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 70px;
 `
+
 const InputsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -53,6 +52,7 @@ const InputsContainer = styled.div`
     gap: 15px;
   }
 `
+
 const FooterAlt = styled(Footer)`
   margin-top: 270px;
 `
@@ -69,32 +69,36 @@ export default function Home() {
   })
 
   const [searchCard, setSearchCard] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const router = useRouter()
 
   if (error) return <div>Erro ao carregar os dados</div>
   if (!data) return <div>Carregando...</div>
 
   const lowerSearch = searchCard.toLowerCase()
-  const filterData = data.filter((card) => card.title.toLowerCase().includes(lowerSearch))
+  const lowerSearch2 = selectedCategory.toLowerCase()
+  const filterData = data.filter(
+    (card) =>
+      card.title.toLowerCase().includes(lowerSearch) &&
+      (selectedCategory === '' || card.category.toLowerCase() === lowerSearch2)
+  )
+
+  const handleCategoryChange = (selectedValue) => {
+    setSelectedCategory(selectedValue) // Atualiza o estado com o valor selecionado
+  }
+
+  const handleSeach = (e) => {
+    setSearchCard(e.target.value)
+  }
 
   return (
     <Container>
       <NavBar type1 />
       <ContainerContent>
         <InputsContainer>
-          <Input
-            name="title"
-            control={control}
-            onChange={(e) => setSearchCard(e.target.value)}
-            type1
-          />
-          <Selecter name="price" control={control} type2 />
+          <Input name="title" control={control} onChange={handleSeach} type1 />
+          <Selecter name="price" control={control} onChange={handleCategoryChange} type2 />
         </InputsContainer>
-        <Link
-          style={{ color: 'white', fontSize: '17px', margin: '25px ' }}
-          href="/reviewAnnouncement"
-        >
-          {filterData.length === 0 ? '' : 'Veja mais sobre os anúncios'}
-        </Link>
         <ContainerCards>
           {filterData.length === 0 ? (
             <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
@@ -117,6 +121,7 @@ export default function Home() {
     </Container>
   )
 }
+
 export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }) {
   const user = req.session.user
 

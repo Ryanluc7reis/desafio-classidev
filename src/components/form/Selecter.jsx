@@ -38,14 +38,27 @@ const Line = styled.div`
   background-color: red;
   background-color: ${(props) => props.theme.textColor};
 `
-export default function Selecter({ name, control, defaultValue = '', type1, type2, ...props }) {
+export default function Selecter({
+  name,
+  control,
+  defaultValue = '',
+  onChange,
+  type1,
+  type2,
+  ...props
+}) {
   const {
-    field: { value, onChange }
+    field: { value, onChange: onControllerChange }
   } = useController({ name, control, defaultValue })
+
+  const handleChange = (e) => {
+    onControllerChange(e)
+    onChange(e.target.value)
+  }
   return (
     <ContainerBox>
       {type1 && (
-        <StyledSelect {...props} value={value} onChange={onChange}>
+        <StyledSelect {...props} value={value} onChange={handleChange}>
           <option value="" disabled>
             Selecione sua categoria
           </option>
@@ -57,10 +70,8 @@ export default function Selecter({ name, control, defaultValue = '', type1, type
       {type2 && (
         <ContainerSelect>
           <Line />
-          <StyledSelectAlt {...props} value={value} onChange={onChange}>
-            <option value="" disabled>
-              Todas as categorias
-            </option>
+          <StyledSelectAlt {...props} value={value} onChange={handleChange}>
+            <option value="">Todas as categorias</option>
             <option value="Carros">Carros</option>
             <option value="Roupas e acessórios">Roupas e acessórios</option>
             <option value="Eletrônicos">Eletrônicos</option>
