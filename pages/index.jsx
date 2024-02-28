@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { useRouter } from 'next/router'
 import { withIronSessionSsr } from 'iron-session/next'
 import { ironConfig } from '../lib/middlewares/ironSession'
 import Input from '../src/components/form/Input'
@@ -71,7 +70,6 @@ export default function Home() {
 
   const [searchCard, setSearchCard] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  const router = useRouter()
 
   if (error) return <div>Erro ao carregar os dados</div>
   if (!data) return <div>Carregando...</div>
@@ -85,7 +83,7 @@ export default function Home() {
   )
 
   const handleCategoryChange = (selectedValue) => {
-    setSelectedCategory(selectedValue) 
+    setSelectedCategory(selectedValue)
   }
 
   const handleSeach = (e) => {

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+// eslint-disable-next-line no-unused-vars
 import User from '../user/user.model'
 
 const AnuncioSchema = new mongoose.Schema({

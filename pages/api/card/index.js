@@ -41,7 +41,7 @@ router.get('/ola', validation({ params: 'id' }, 'numeric'), async (req, res) => 
   try {
     if (!req.session.user) return res.status(401).send()
     const card = await getOneCard('_id', req.body.id)
-    es.status(200).send(card)
+    res.status(200).send(card)
   } catch (err) {
     return res.status(404).send('This Card does not exist')
   }

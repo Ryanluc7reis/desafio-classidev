@@ -117,9 +117,15 @@ export default function Input({
         </StyledInputContainer>
       )}
       {type3 && (
-        <StyledInputContainerAlt1 {...props}>
+        <StyledInputContainerAlt1>
           <StyledLabel> {label}</StyledLabel>
-          <StyledInputAlt1 placeholder={label} error={error} value={value} onChange={onChange} />
+          <StyledInputAlt1
+            placeholder={label}
+            {...props}
+            error={error}
+            value={value}
+            onChange={onChange}
+          />
           {error && <ErrorLabel> {errorMessage[error.type] || error.message}</ErrorLabel>}
         </StyledInputContainerAlt1>
       )}

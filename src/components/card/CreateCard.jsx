@@ -63,9 +63,12 @@ export default function CreateCard() {
     resolver: joiResolver(createCardSchema),
     mode: 'all'
   })
-
+  const handleCategoryChange = (categoryValue) => {
+    setSelectedCategory(categoryValue)
+  }
   const { mutate } = useSWRConfig()
   const [loading, setLoading] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('')
   const onSubmit = async (data) => {
     setLoading(true)
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, data)
@@ -91,7 +94,7 @@ export default function CreateCard() {
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Input placeholder="Nome do produto" name="title" control={control} type2 />
-          <Selecter name="category" control={control} type1 />
+          <Selecter name="category" control={control} onChange={handleCategoryChange} type1 />
           <Input placeholder="Preço" name="price" control={control} type2 />
           <Input placeholder="Whatsapp" name="whatsapp" control={control} type2 />
           <InputAlt placeholder="Descrição" name="description" control={control} type2 />

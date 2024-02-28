@@ -89,10 +89,10 @@ export default function Card({ title, date, price, description, category }) {
               category === 'Roupas e acessórios'
                 ? '/roupas.png'
                 : category === 'Eletrônicos'
-                  ? '/pc.png'
-                  : category === 'Carros'
-                    ? '/car.png'
-                    : ''
+                ? '/pc.png'
+                : category === 'Carros'
+                ? '/car.png'
+                : ''
             }
           />
           <CategoryName>{category}</CategoryName>

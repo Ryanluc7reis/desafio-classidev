@@ -1,7 +1,18 @@
 {
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/jsx-runtime"
+  ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+		"react/prop-types": "off",
+    "no-useless-catch": "off",
+    "no-unused-vars":"off",
+   "react-hooks/rules-of-hooks": "off",
+   "jsx-a11y/alt-text": "off",
+   "@next/next/no-img-element": "off"
   }
 }
