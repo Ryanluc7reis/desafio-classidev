@@ -4,13 +4,7 @@ import createHandler from '../../../lib/middlewares/nextConnect'
 import { ironConfig } from '../../../lib/middlewares/ironSession'
 import validation from '../../../lib/middlewares/validation'
 
-import {
-  createCard,
-  getCards,
-  deleteCard,
-  editCard,
-  getOneCard
-} from '../../../modules/card/card.service'
+import { createCard, getCards, deleteCard, editCard } from '../../../modules/card/card.service'
 import {
   createCardSchema,
   deleteCardSchema,
@@ -28,6 +22,7 @@ router.post(validation({ body: createCardSchema }), async (req, res) => {
     res.status(400).json(err.message)
   }
 })
+
 router.get(async (req, res) => {
   try {
     if (!req.session.user) return res.status(401).send()
@@ -37,15 +32,7 @@ router.get(async (req, res) => {
     return res.status(500).send(err.message)
   }
 })
-router.get('/ola', validation({ params: 'id' }, 'numeric'), async (req, res) => {
-  try {
-    if (!req.session.user) return res.status(401).send()
-    const card = await getOneCard('_id', req.body.id)
-    res.status(200).send(card)
-  } catch (err) {
-    return res.status(404).send('This Card does not exist')
-  }
-})
+
 router.delete(validation(deleteCardSchema), async (req, res) => {
   try {
     if (!req.session.user) return res.status(401).send()

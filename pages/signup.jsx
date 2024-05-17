@@ -87,7 +87,7 @@ function SignupPage() {
         data
       )
       if (status === 201) {
-        router.push('/')
+        router.push('/login')
       }
     } catch (err) {
       if (err.response.data.code === 11000) {

@@ -17,6 +17,10 @@ const StyledCard = styled.div`
   border-radius: 10px;
   background: rgba(217, 217, 217, 1);
   padding: 25px;
+  cursor: pointer;
+  :hover {
+    scale: 1.1;
+  }
   @media (max-width: 375px) {
     width: 270px;
     height: 295px;
@@ -73,10 +77,10 @@ const HeaderContainer = styled.div`
   gap: 4px;
 `
 
-export default function Card({ title, date, price, description, category }) {
+export default function Card({ title, date, price, description, category, ...props }) {
   return (
     <CardContainer>
-      <StyledCard>
+      <StyledCard {...props}>
         <HeaderContainer>
           <Title>{title}</Title>
           <DatePosted>{moment(date).format('LLL')}</DatePosted>
