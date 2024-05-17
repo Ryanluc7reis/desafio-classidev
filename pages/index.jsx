@@ -56,7 +56,16 @@ const InputsContainer = styled.div`
 const FooterAlt = styled(Footer)`
   margin-top: 270px;
 `
-
+const LoadingScreen = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  color: white;
+  background: linear-gradient(to left, #4d4d4d 15%, #000 100%);
+`
 const fetcher = async (url) => {
   const response = await axios.get(url)
   return response.data
@@ -71,18 +80,17 @@ export default function Home() {
 
   const [searchCard, setSearchCard] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [cardId, setCardId] = useState(null)
 
   const lowerSearch = searchCard.toLowerCase()
   const lowerSearch2 = selectedCategory.toLowerCase()
 
-  const filterData = data
-    ? data.filter(
-        (card) =>
-          card.title.toLowerCase().includes(lowerSearch) &&
-          (selectedCategory === '' || card.category.toLowerCase() === lowerSearch2)
-      )
-    : []
+  const filterData =
+    data &&
+    data.filter(
+      (card) =>
+        card.title.toLowerCase().includes(lowerSearch) &&
+        (selectedCategory === '' || card.category.toLowerCase() === lowerSearch2)
+    )
 
   const handleCategoryChange = (selectedValue) => {
     setSelectedCategory(selectedValue)
@@ -92,10 +100,10 @@ export default function Home() {
     setSearchCard(e.target.value)
   }
   const handleId = (cardId) => {
-    setCardId(cardId)
     router.push(`reviewAnnouncement?id=${cardId}`)
   }
-
+  if (error) return <LoadingScreen>Erro ao carregar dados.</LoadingScreen>
+  if (!data) return <LoadingScreen>Carregando...</LoadingScreen>
   return (
     <Container>
       <NavBar type1 />
@@ -108,27 +116,21 @@ export default function Home() {
           Clique em um anúncio para saber mais sobre
         </h2>
         <ContainerCards>
-          {!filterData ? (
-            <div style={{ color: 'white' }}> Carregando.. </div>
+          {filterData.length === 0 ? (
+            <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
           ) : (
-            <>
-              {filterData.length === 0 ? (
-                <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
-              ) : (
-                filterData.map((card) => (
-                  <Card
-                    onClick={() => handleId(card._id)}
-                    key={card._id}
-                    title={card.title}
-                    date={card.createdDate}
-                    price={card.price}
-                    description={card.description}
-                    category={card.category}
-                    id={card._id}
-                  />
-                ))
-              )}
-            </>
+            filterData.map((card) => (
+              <Card
+                onClick={() => handleId(card._id)}
+                key={card._id}
+                title={card.title}
+                date={card.createdDate}
+                price={card.price}
+                description={card.description}
+                category={card.category}
+                id={card._id}
+              />
+            ))
           )}
         </ContainerCards>
       </ContainerContent>

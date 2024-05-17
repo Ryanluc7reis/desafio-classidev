@@ -12,7 +12,7 @@ import Review from '../src/components/review/Review'
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: ${(props) => props.theme.colors.background};
@@ -37,6 +37,16 @@ const ArrowImg = styled.img`
   width: 16px;
   height: 16px;
 `
+const LoadingScreen = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  color: white;
+  background: linear-gradient(to left, #4d4d4d 15%, #000 100%);
+`
 const fetcher = async (url) => {
   const response = await axios.get(url)
   return response.data
@@ -50,8 +60,8 @@ export default function ReviewAnnouncementPage({ user }) {
     id ? `${process.env.NEXT_PUBLIC_API_URL}/api/card/getOneCard?id=${id}` : null,
     fetcher
   )
-  if (error) return <div>Erro ao carregar os dados</div>
-
+  if (error) return <LoadingScreen>Erro ao carregar dados.</LoadingScreen>
+  if (!data) return <LoadingScreen>Carregando...</LoadingScreen>
   return (
     <Container>
       <NavBar type2 />
@@ -59,23 +69,18 @@ export default function ReviewAnnouncementPage({ user }) {
         <ArrowImg src="/arrow-left.png" />
         <TextLink onClick={() => router.push('/')}>Voltar para a página inicial</TextLink>
       </BacktoHomeContainer>
-      {!data ? (
-        <div>Carregando...</div>
-      ) : (
-        <>
-          {data && (
-            <Review
-              id={data._id}
-              title={data.title}
-              date={data.createdDate}
-              price={data.price}
-              description={data.description}
-              category={data.category}
-              whatsapp={data.whatsapp}
-              isOwner={data.creator === user.id}
-            />
-          )}
-        </>
+
+      {data && (
+        <Review
+          id={data._id}
+          title={data.title}
+          date={data.createdDate}
+          price={data.price}
+          description={data.description}
+          category={data.category}
+          whatsapp={data.whatsapp}
+          isOwner={data.creator === user.id}
+        />
       )}
 
       <Footer />
