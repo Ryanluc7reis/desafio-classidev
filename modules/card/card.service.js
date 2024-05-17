@@ -11,11 +11,12 @@ export const createCard = async (body, user) => {
     creator: user.id
   })
 }
-export const getOneCard = async (id) => {
+export const getOneCard = async (body) => {
   return await Anuncio.findOne({
-    _id: id
+    _id: body.id
   })
 }
+
 export const getCards = async (limit = 10) => {
   return await Anuncio.find().sort({ createdDate: -1 }).limit(limit)
 }

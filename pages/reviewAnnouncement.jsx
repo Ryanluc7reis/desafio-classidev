@@ -37,14 +37,22 @@ const ArrowImg = styled.img`
   width: 16px;
   height: 16px;
 `
+const fetcher = async (url) => {
+  const response = await axios.get(url)
+  return response.data
+}
 
-export default function reviewAnnouncementPage({ user }) {
+export default function ReviewAnnouncementPage({ user }) {
   const router = useRouter()
-  const fetcher = async (url) => {
-    const response = await axios.get(url)
-    return response.data
-  }
-  const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher)
+  const { id } = router.query
+
+  const { data, error } = useSWR(
+    id ? `${process.env.NEXT_PUBLIC_API_URL}/api/card/getOneCard?id=${id}` : null,
+    fetcher
+  )
+  if (error) return <div>Erro ao carregar os dados</div>
+  if (!data) return <div>Carregando...</div>
+
   return (
     <Container>
       <NavBar type2 />
@@ -52,19 +60,18 @@ export default function reviewAnnouncementPage({ user }) {
         <ArrowImg src="/arrow-left.png" />
         <TextLink onClick={() => router.push('/')}>Voltar para a página inicial</TextLink>
       </BacktoHomeContainer>
-      {data?.map((card) => (
+      {data && (
         <Review
-          id={card._id}
-          key={card._id}
-          title={card.title}
-          date={card.createdDate}
-          price={card.price}
-          description={card.description}
-          category={card.category}
-          whatsapp={card.whatsapp}
-          isOwner={card.creator === user.id}
+          id={data._id}
+          title={data.title}
+          date={data.createdDate}
+          price={data.price}
+          description={data.description}
+          category={data.category}
+          whatsapp={data.whatsapp}
+          isOwner={data.creator === user.id}
         />
-      ))}
+      )}
       <Footer />
     </Container>
   )

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { withIronSessionSsr } from 'iron-session/next'
 import { ironConfig } from '../lib/middlewares/ironSession'
@@ -63,6 +63,7 @@ const fetcher = async (url) => {
 }
 
 export default function Home() {
+  const router = useRouter()
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher)
   const { control } = useForm({
     mode: 'all'
@@ -70,6 +71,7 @@ export default function Home() {
 
   const [searchCard, setSearchCard] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [cardId, setCardId] = useState(null)
 
   if (error) return <div>Erro ao carregar os dados</div>
   if (!data) return <div>Carregando...</div>
@@ -89,6 +91,10 @@ export default function Home() {
   const handleSeach = (e) => {
     setSearchCard(e.target.value)
   }
+  const handleId = (cardId) => {
+    setCardId(cardId)
+    router.push(`reviewAnnouncement?id=${cardId}`)
+  }
 
   return (
     <Container>
@@ -98,18 +104,14 @@ export default function Home() {
           <Input name="title" control={control} onChange={handleSeach} type1 />
           <Selecter name="price" control={control} onChange={handleCategoryChange} type2 />
         </InputsContainer>
-        <Link
-          style={{ color: 'white', fontSize: '17px', margin: '25px ' }}
-          href="/reviewAnnouncement"
-        >
-          {filterData.length === 0 ? '' : 'Veja mais sobre os anúncios'}
-        </Link>
+
         <ContainerCards>
           {filterData.length === 0 ? (
             <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
           ) : (
             filterData.map((card) => (
               <Card
+                onClick={() => handleId(card._id)}
                 key={card._id}
                 title={card.title}
                 date={card.createdDate}

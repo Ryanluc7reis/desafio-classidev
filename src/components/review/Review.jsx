@@ -128,7 +128,7 @@ export default function Review({
   }
   const handleSaveEdit = () => {
     setEditCard(false)
-    mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
+    mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card/getOneCard?id=${id}`)
   }
   const handleDelete = async () => {
     try {
