@@ -3,6 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useSWRConfig } from 'swr'
 import moment from 'moment'
+import { useRouter } from 'next/router'
 
 import EditCard from '../card/EditCard'
 
@@ -121,6 +122,7 @@ export default function Review({
   id,
   isOwner
 }) {
+  const router = useRouter()
   const { mutate } = useSWRConfig()
   const [editCard, setEditCard] = useState(false)
   const handleEdit = async () => {
@@ -137,7 +139,11 @@ export default function Review({
           id
         }
       })
-      if (response.status === 200) mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
+
+      if (response.status === 200) {
+        router.push('/')
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
+      }
     } catch (err) {
       console.error(err)
     }
