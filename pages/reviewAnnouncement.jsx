@@ -12,7 +12,7 @@ import Review from '../src/components/review/Review'
 
 const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: ${(props) => props.theme.colors.background};
@@ -51,7 +51,6 @@ export default function ReviewAnnouncementPage({ user }) {
     fetcher
   )
   if (error) return <div>Erro ao carregar os dados</div>
-  if (!data) return <div>Carregando...</div>
 
   return (
     <Container>
@@ -60,18 +59,25 @@ export default function ReviewAnnouncementPage({ user }) {
         <ArrowImg src="/arrow-left.png" />
         <TextLink onClick={() => router.push('/')}>Voltar para a página inicial</TextLink>
       </BacktoHomeContainer>
-      {data && (
-        <Review
-          id={data._id}
-          title={data.title}
-          date={data.createdDate}
-          price={data.price}
-          description={data.description}
-          category={data.category}
-          whatsapp={data.whatsapp}
-          isOwner={data.creator === user.id}
-        />
+      {!data ? (
+        <div>Carregando...</div>
+      ) : (
+        <>
+          {data && (
+            <Review
+              id={data._id}
+              title={data.title}
+              date={data.createdDate}
+              price={data.price}
+              description={data.description}
+              category={data.category}
+              whatsapp={data.whatsapp}
+              isOwner={data.creator === user.id}
+            />
+          )}
+        </>
       )}
+
       <Footer />
     </Container>
   )

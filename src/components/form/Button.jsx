@@ -26,7 +26,7 @@ const StyledButton = styled.button`
 const Button = ({ children, loading, disabled, ...props }) => {
   return (
     <StyledButton disabled={disabled || loading} {...props}>
-      {loading && <img src="./loader.png" width="15px" />}
+      {loading && <img src="/loader.svg" width="15px" />}
       {!loading && children}
     </StyledButton>
   )

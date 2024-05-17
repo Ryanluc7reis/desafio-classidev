@@ -18,14 +18,18 @@ const StyledCard = styled.div`
   background: rgba(217, 217, 217, 1);
   padding: 25px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+
   :hover {
-    scale: 1.1;
+    transform: translateY(-15px);
   }
+
   @media (max-width: 375px) {
     width: 270px;
     height: 295px;
   }
 `
+
 const Title = styled.h2`
   font-size: 39px;
   font-weight: 700;
