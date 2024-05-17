@@ -7,9 +7,14 @@ import { createCardSchema } from '../../../modules/card/card.schema'
 
 import Button from '../form/Button'
 import Input from '../form/Input'
+import Selecter from '../form/Selecter'
 
+const InputAlt2 = styled(Input)`
+  margin: 7px 0px;
+`
 const InputAlt = styled(Input)`
   height: 126px;
+  margin: 7px 0px;
   ::placeholder {
     align-items: flex-end;
   }
@@ -44,22 +49,23 @@ const EditCard = ({ id, title, whatsapp, price, description, category, onSave })
   }
   return (
     <form onSubmit={handleSubmit(handleSaveEdit)}>
-      <Input
+      <InputAlt2
         placeholder="Nome do produto"
         name="title"
         control={control}
         defaultValue={title}
         type2
       />
-      <Input
+      <Selecter
         placeholder="Selecione a categoria"
         name="category"
         control={control}
         defaultValue={category}
-        type2
+        type1
       />
-      <Input placeholder="Preço" name="price" control={control} defaultValue={price} type2 />
-      <Input
+
+      <InputAlt2 placeholder="Preço" name="price" control={control} defaultValue={price} type2 />
+      <InputAlt2
         placeholder="Whatsapp"
         name="whatsapp"
         control={control}

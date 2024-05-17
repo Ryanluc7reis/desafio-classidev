@@ -8,7 +8,7 @@ const StyledSelect = styled.select`
   width: 504px;
   height: 47px;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 24px;
   cursor: pointer;
@@ -22,11 +22,12 @@ const StyledSelectAlt = styled.select`
   border: 0;
   outline: none;
   font-weight: bold;
-  background: transparent;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
   font-style: italic;
+  cursor: pointer;
+  background-color: #7e7e7e;
 `
 const ContainerSelect = styled.div`
   display: flex;

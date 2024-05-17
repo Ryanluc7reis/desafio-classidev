@@ -15,7 +15,7 @@ import Selecter from '../src/components/form/Selecter'
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: ${(props) => props.theme.colors.background};
+  background: linear-gradient(to left, #4d4d4d 15%, #000 100%);
 `
 
 const ContainerCards = styled.div`
@@ -73,16 +73,16 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [cardId, setCardId] = useState(null)
 
-  if (error) return <div>Erro ao carregar os dados</div>
-  if (!data) return <div>Carregando...</div>
-
   const lowerSearch = searchCard.toLowerCase()
   const lowerSearch2 = selectedCategory.toLowerCase()
-  const filterData = data.filter(
-    (card) =>
-      card.title.toLowerCase().includes(lowerSearch) &&
-      (selectedCategory === '' || card.category.toLowerCase() === lowerSearch2)
-  )
+
+  const filterData = data
+    ? data.filter(
+        (card) =>
+          card.title.toLowerCase().includes(lowerSearch) &&
+          (selectedCategory === '' || card.category.toLowerCase() === lowerSearch2)
+      )
+    : []
 
   const handleCategoryChange = (selectedValue) => {
     setSelectedCategory(selectedValue)
@@ -104,23 +104,31 @@ export default function Home() {
           <Input name="title" control={control} onChange={handleSeach} type1 />
           <Selecter name="price" control={control} onChange={handleCategoryChange} type2 />
         </InputsContainer>
-
+        <h2 style={{ color: '#c5c5c5', marginTop: '15px', fontWeight: '500' }}>
+          Clique em um anúncio para saber mais sobre
+        </h2>
         <ContainerCards>
-          {filterData.length === 0 ? (
-            <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
+          {!filterData ? (
+            <div style={{ color: 'white' }}> Carregando.. </div>
           ) : (
-            filterData.map((card) => (
-              <Card
-                onClick={() => handleId(card._id)}
-                key={card._id}
-                title={card.title}
-                date={card.createdDate}
-                price={card.price}
-                description={card.description}
-                category={card.category}
-                id={card._id}
-              />
-            ))
+            <>
+              {filterData.length === 0 ? (
+                <h1 style={{ color: 'white' }}>Nenhum anúncio encontrado</h1>
+              ) : (
+                filterData.map((card) => (
+                  <Card
+                    onClick={() => handleId(card._id)}
+                    key={card._id}
+                    title={card.title}
+                    date={card.createdDate}
+                    price={card.price}
+                    description={card.description}
+                    category={card.category}
+                    id={card._id}
+                  />
+                ))
+              )}
+            </>
           )}
         </ContainerCards>
       </ContainerContent>
