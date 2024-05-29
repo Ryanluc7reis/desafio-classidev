@@ -1,40 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# ClassifiDev
+ClassifiDev é uma aplicação full-stack web construída durante o processo seletivo da empresa [Seja-Dev](https://www.linkedin.com/company/seja-dev/).
 
-First, run the development server:
+A aplicação consiste em fornecer um site no qual você possa anunciar qualquer tipo de produto de seu interesse para venda, possibilitando você estar editando ou excluindo seus anúncios a qualquer momento.
+Essa aplicação é utilizável tanto em web, quanto em mobile.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layouts
+![projeto-cassidev](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/ad54f144-5c9a-4151-aeb8-942740213889)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![classifi2](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/fcad4d33-ce64-4920-b18c-2793aa1c045c)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![classifi3](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/e383bfa6-b088-48b0-a9b6-22e69c9715a7)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![classifi4](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/88adde2b-824f-4810-bc77-bac2cbfc5ebd)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tecnologias utilizadas
+### Back-end
+* NodeJs
+* Iron-Session
+* Mongoose
+* Joi
+* Webpack
+* ### Front-end
+* ReactJs
+* Styled-componentes
+* NextJs
+## Implatação em produção
+* Back-end: Vercel
+* Front-end web: Vercel
+* Banco de dados: MongoDB
+## Autor
 
-## Learn More
+Ryan Lucas Ferreira Reis
 
-To learn more about Next.js, take a look at the following resources:
+Linkedin : https://www.linkedin.com/in/ryanluc7reis/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+E-mail : ryan.dev18@outlook.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Portfolio: https://portifolio-ryan.vercel.app/
 
-## Deploy on Vercel
-
-Link do deploy do projeto: https://desafio-classidev-ten.vercel.app/login 
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
