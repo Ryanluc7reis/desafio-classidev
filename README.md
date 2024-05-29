@@ -3,7 +3,7 @@
 ClassifiDev é uma aplicação web construída durante o processo seletivo da empresa [Seja-Dev](https://www.linkedin.com/company/seja-dev/).
 
 A aplicação consiste em fornecer um site no qual você possa anunciar qualquer tipo de produto de seu interesse para venda, possibilitando você estar editando ou excluindo seus anúncios a qualquer momento.
-Essa aplicação é utilizável tanto em web, quanto em mobile.
+(Essa aplicação é adaptada para mobile!!)
 
 Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login 
 
