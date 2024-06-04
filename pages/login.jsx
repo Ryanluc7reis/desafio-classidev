@@ -59,13 +59,22 @@ const TextAlt = styled.p`
   }
 `
 const ButtonAlt = styled(Button)`
-  margin-left: 19px;
-  width: 88%;
+  margin: 0px 19px;
+  width: 90%;
+`
+const ButtonAlt1 = styled(Button)`
+  margin: 9px 19px;
+  width: 90%;
 `
 const LogoAlt = styled(Logo)`
   cursor: default;
 `
-
+const Barra = styled.div`
+  width: 90%;
+  height: 4px;
+  background: grey;
+  border-radius: 10px;
+`
 export default function LoginPage() {
   const router = useRouter()
   const {
@@ -77,6 +86,30 @@ export default function LoginPage() {
     resolver: joiResolver(loginSchema)
   })
   const [loading, setLoading] = useState(false)
+  const onSubmitVisit = async () => {
+    try {
+      setLoading(true)
+      const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, {
+        userOrEmail: 'visit1',
+        password: 'visit123'
+      })
+      if (status === 200) {
+        router.push('/')
+      }
+    } catch ({ response }) {
+      if (response.data === 'password incorrect') {
+        setError('password', {
+          message: 'A senha está incorreta.'
+        })
+      } else if (response.data === 'not found') {
+        setError('userOrEmail', {
+          message: 'Usuário ou e-mail não encontrado.'
+        })
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const onSubmit = async (data) => {
     try {
@@ -112,6 +145,12 @@ export default function LoginPage() {
             Entrar
           </ButtonAlt>
         </Form>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+          <Barra />
+          <Text>Ou</Text>
+          <Barra />
+        </div>
+        <ButtonAlt1 onClick={onSubmitVisit}> Logar como visitante</ButtonAlt1>
         <TextAlt>
           Não possui uma conta ?{' '}
           <Link style={{ color: 'blue' }} href="/signup">

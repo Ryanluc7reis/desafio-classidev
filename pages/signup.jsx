@@ -30,7 +30,7 @@ const Container = styled.div`
 `
 const FormContainer = styled.div`
   margin-top: 20px;
-  padding: 20px;
+  padding: 15px 10px;
   width: 400px;
   border-radius: 10px;
   display: flex;
@@ -63,8 +63,8 @@ const TextAlt = styled.p`
   text-align: center;
 `
 const ButtonAlt = styled(Button)`
-  margin-left: 18px;
   width: 90%;
+  margin: 7px 20px;
 `
 
 function SignupPage() {
