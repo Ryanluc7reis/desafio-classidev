@@ -150,7 +150,10 @@ export default function LoginPage() {
           <Text>Ou</Text>
           <Barra />
         </div>
-        <ButtonAlt1 loading={loading} onClick={onSubmitVisit}> Logar como visitante</ButtonAlt1>
+        <ButtonAlt1 loading={loading} onClick={onSubmitVisit}>
+          {' '}
+          Logar como visitante
+        </ButtonAlt1>
         <TextAlt>
           Não possui uma conta ?{' '}
           <Link style={{ color: 'blue' }} href="/signup">
