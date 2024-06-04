@@ -14,7 +14,8 @@ Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login
 
 ![classifi3](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/e383bfa6-b088-48b0-a9b6-22e69c9715a7)
 
-![classifi4](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/88adde2b-824f-4810-bc77-bac2cbfc5ebd)
+![classifi](https://github.com/Ryanluc7reis/desafio-classidev/assets/112912919/fefb6347-0b3f-4955-ad7b-13ee2a4aa8bc)
+
 
 ## Tecnologias utilizadas
 ### Back-end
