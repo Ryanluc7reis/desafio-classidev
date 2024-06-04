@@ -11,7 +11,7 @@ const StyledInputContainer = styled.div`
   align-items: center;
   gap: 10px;
   color: ${(props) => props.theme.colors.textColor};
-  padding: 12px 20px;
+  padding: 15px;
   width: 504px;
   height: 46px;
   border-radius: 10px;
@@ -25,7 +25,7 @@ const StyledInputContainerAlt = styled.div`
 `
 const StyledInputContainerAlt1 = styled.div`
   color: ${(props) => props.theme.colors.textColor};
-  padding: 12px 20px;
+  padding: 7px;
   width: 100%;
 `
 
@@ -36,7 +36,7 @@ const StyledInput = styled.input`
   background: transparent;
   font-size: 15px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 15px;
   border: ${(props) => props.onError && `border: 2px solid ${props.theme.colors.error}`};
   &:focus {
     outline: none;
