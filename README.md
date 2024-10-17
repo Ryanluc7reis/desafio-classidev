@@ -23,6 +23,7 @@ Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login
 * Mongoose
 * Joi
 * Webpack
+* MongoDB
 ### Front-end
 * ReactJs
 * Styled-componentes
@@ -39,7 +40,7 @@ Ryan Lucas Ferreira Reis
 
 Linkedin : https://www.linkedin.com/in/ryanluc7reis/
 
-E-mail : ryan.dev18@outlook.com
+E-mail : ryanluc.dev18@gmail.com
 
 Portfolio: https://portifolio-ryan.vercel.app/
 
