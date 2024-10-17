@@ -2,8 +2,7 @@
 # ClassifiDev
 ClassifiDev é uma aplicação web construída durante o processo seletivo da empresa [Seja-Dev](https://www.linkedin.com/company/seja-dev/).
 
-A aplicação consiste em fornecer um site no qual você possa anunciar qualquer tipo de produto de seu interesse para venda, possibilitando você estar editando ou excluindo seus anúncios a qualquer momento.
-(Essa aplicação é adaptada para mobile!!)
+A aplicação consiste em fornecer um site no qual você possa anunciar qualquer tipo de produto de seu interesse para venda, possibilitando você como cliente ver informações sobre o produto 
 
 Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login 
 
@@ -24,14 +23,16 @@ Link do projeto no ar: https://desafio-classidev-ten.vercel.app/login
 * Mongoose
 * Joi
 * Webpack
-* ### Front-end
+### Front-end
 * ReactJs
 * Styled-componentes
 * NextJs
+* Axios
+* SWR
+
 ## Implatação em produção
 * Back-end: Vercel
 * Front-end web: Vercel
-* Banco de dados: MongoDB
 ## Autor
 
 Ryan Lucas Ferreira Reis
